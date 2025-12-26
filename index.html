@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="resources/logo.png" type="image/png">
+</head>
+<body>
+    <h1>Number Guessing Game</h1>
+
+    <div id="container">
+        <div id="desc">
+            <p>Guess a number 1 - 100</p>
+        </div>
+        <div>
+            <h2 id="hintText">
+                
+            </h2>
+        </div>
+        <div id="inputDiv">
+            <input id="input" type="number">
+            <button id="clearBtn" onclick="onClear()">Clear</button>
+        </div>
+        <div id="buttons">
+            <div>
+                <button id="guessBtn" onclick="onGuess()">Guess</button>
+            </div>
+            <div>
+                <button id="giveUpBtn" onclick="onGiveUp()">Give Up</button>
+            </div>
+        </div>
+    </div>
+    <a href="https://github.com/sauceeboy/Number-Guessing-Game" target="_blank" style="position: fixed; bottom: 1px;
+    text-decoration: none;">GitHub</a>
+</body>
+<script src="src/script.js"></script>
+</html>
