@@ -12,9 +12,9 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Set up Node.js (if using Node)
+    - name: Set up Node.js (optional)
       uses: actions/setup-node@v3
       with:
         node-version: '18'
@@ -27,8 +27,8 @@ jobs:
 
     - name: Build project
       run: |
-        # Replace this with your build command
-        # Example: generating HTML from a template or markdown
+        # Replace with your own build command if needed:
+        # e.g., npm run build or a static site generator
         if [ -f package.json ]; then
           npm run build
         else
@@ -36,7 +36,7 @@ jobs:
         fi
 
     - name: Upload HTML artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: html-output
         path: output.html
