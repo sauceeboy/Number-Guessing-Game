@@ -1,0 +1,42 @@
+name: Build HTML
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js (if using Node)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: |
+        if [ -f package.json ]; then
+          npm install
+        fi
+
+    - name: Build project
+      run: |
+        # Replace this with your build command
+        # Example: generating HTML from a template or markdown
+        if [ -f package.json ]; then
+          npm run build
+        else
+          echo "<!DOCTYPE html><html><body><h1>Hello World</h1></body></html>" > output.html
+        fi
+
+    - name: Upload HTML artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: html-output
+        path: output.html
