@@ -12,7 +12,10 @@
 
     <div id="container">
         <div id="desc">
-            <p>Guess a number 1 - 100</p>
+            <p>Guess a number</p>
+            <input type="number" id="costomNum1" value="1">
+            <p>-</p>
+            <input type="number" id="costomNum2" value="100">
         </div>
         <div>
             <h2 id="score">Score: 0</h2>
@@ -33,6 +36,9 @@
             </div>
             <div>
                 <button id="giveUpBtn" onclick="onGiveUp()">Give Up</button>
+            </div>
+            <div>
+                <button id="restartGameBtn" onclick="restart()">Restart Game</button>
             </div>
         </div>
     </div>
