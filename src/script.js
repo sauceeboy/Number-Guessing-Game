@@ -2,6 +2,7 @@ const hintText = document.getElementById("hintText");
 const input = document.getElementById("input");
 const scoreText = document.getElementById("score");
 const guessBtn = document.getElementById("guessBtn");
+const guessesText = document.getElementById("guesses");
 
 const num1 = document.getElementById("costomNum1");
 const num2 = document.getElementById("costomNum2");
@@ -13,6 +14,9 @@ let score = Number(localStorage.getItem("score")) || 0;
 scoreText.textContent = "Score: " + score;
 
 let gameOver = false;
+let guesses = 10;
+
+guessesText.textContent = "Guesses: " + guesses;
 
 function getMin() {
     return Number(num1.value);
@@ -34,7 +38,6 @@ function newRandom() {
     if (min >= max) {
         hintText.textContent = "Invalid range!";
         hintText.style.color = "#E61717";
-        gameOver = true;
         return null;
     }
 
@@ -54,7 +57,7 @@ num2.addEventListener("change", () => {
 });
 
 function onGuess() {
-    if (gameOver) return;
+    if (gameOver || random === null) return;
 
     let guess = Number(input.value);
     let min = getMin();
@@ -66,6 +69,9 @@ function onGuess() {
         return;
     }
 
+    guesses--;
+    guessesText.textContent = "Guesses: " + guesses;
+
     if (guess === random) {
         hintText.textContent = "Correct! Press Restart to play again.";
         hintText.style.color = "#00F719";
@@ -76,21 +82,30 @@ function onGuess() {
 
         gameOver = true;
         guessBtn.disabled = true;
+        return;
     }
-    else if (Math.abs(guess - random) <= 10) {
+
+    if (guesses === 0) {
+        hintText.textContent = "Out of guesses! The number was: " + random;
+        hintText.style.color = "#E61717";
+        gameOver = true;
+        guessBtn.disabled = true;
+        return;
+    }
+
+    if (Math.abs(guess - random) <= 10) {
         hintText.textContent = guess > random
             ? "Lower, but within 10!"
             : "Higher, but within 10!";
         hintText.style.color = "#05ca99";
-    }
-    else {
+    } else {
         hintText.textContent = guess > random ? "Lower" : "Higher";
         hintText.style.color = "#34A6F7";
     }
 }
 
 function onGiveUp() {
-    if (gameOver) return;
+    if (gameOver || random === null) return;
 
     gameOver = true;
     hintText.textContent = "You gave up! The number was: " + random;
@@ -104,6 +119,8 @@ function restart() {
     input.value = "";
     gameOver = false;
     guessBtn.disabled = false;
+    guesses = 10;
+    guessesText.textContent = "Guesses: " + guesses;
 }
 
 function onClear() {
