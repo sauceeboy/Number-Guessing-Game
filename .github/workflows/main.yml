@@ -1,4 +1,4 @@
-name: Upload HTML
+name: Upload HTML Project
 
 on:
   push:
@@ -14,8 +14,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Upload index.html artifact
+    - name: Upload HTML project
       uses: actions/upload-artifact@v4
       with:
-        name: html-output
-        path: index.html
+        name: html-project
+        path: |
+          index.html
+          style.css
+          src/script.js
+          resources/logo.png
+          indexd.html
+          dev.htmm
