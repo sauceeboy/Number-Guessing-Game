@@ -132,3 +132,12 @@ function onCScore() {
     scoreText.textContent = "Score: 0";
     localStorage.setItem("score", score);
 }
+
+document.addEventListener("keydown",  function(event) {
+    if (event.key === "Enter") {
+        onGuess();
+    }
+    if (event.key === "r") {
+        restart();
+    }
+})
