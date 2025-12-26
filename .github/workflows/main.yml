@@ -1,4 +1,4 @@
-name: Build HTML
+name: Upload HTML
 
 on:
   push:
@@ -7,36 +7,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  upload-html:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Node.js (optional)
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-
-    - name: Install dependencies
-      run: |
-        if [ -f package.json ]; then
-          npm install
-        fi
-
-    - name: Build project
-      run: |
-        # Replace with your own build command if needed:
-        # e.g., npm run build or a static site generator
-        if [ -f package.json ]; then
-          npm run build
-        else
-          echo "<!DOCTYPE html><html><body><h1>Hello World</h1></body></html>" > output.html
-        fi
-
-    - name: Upload HTML artifact
+    - name: Upload index.html artifact
       uses: actions/upload-artifact@v4
       with:
         name: html-output
-        path: output.html
+        path: index.html
